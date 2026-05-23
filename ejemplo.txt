@@ -1,0 +1,11 @@
+prompt-ai-app/
+│
+├── .env                    ← tu única variable de entorno
+├── main.py                 ← FastAPI (del profe, extendido)
+├── rxconfig.py             ← config de Reflex
+├── requirements.txt        ← todas las librerías
+├── venv/                   ← un solo entorno virtual
+│
+└── prompt_app/
+    ├── __init__.py
+    └── prompt_app.py       ← la UI en Reflex

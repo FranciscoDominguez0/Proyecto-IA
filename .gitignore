@@ -1,3 +1,8 @@
+*.py[cod]
+assets/external/
+.states
+.web
+*.db
 # Entorno virtual
 venv/
 
