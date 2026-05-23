@@ -11,7 +11,7 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = FastAPI(
     title="PromptForge API",
-    description="API que recibe un prompt estructurado y llama a Gemini o Grok",
+    description="API que recibe un prompt estructurado y llama a Gemini o DeepSeek",
     version="1.0"
 )
 
@@ -39,30 +39,29 @@ IMPORTANTE: Responde en texto claro y bien estructurado."""
         except Exception as e:
             return {"respuesta": f"Error con Gemini: {str(e)}"}
 
-    elif datos.modelo == "grok":
+    elif datos.modelo == "deepseek":
         try:
             r = requests.post(
-                "https://api.x.ai/v1/responses",
+                "https://api.deepseek.com/chat/completions",
                 headers={
-                    "Authorization": f"Bearer {os.getenv('GROK_API_KEY')}",
+                    "Authorization": f"Bearer {os.getenv('DEEPSEEK_API_KEY')}",
                     "Content-Type": "application/json"
                 },
                 json={
-                    "model": "grok-4.20-reasoning",
-                    "input": prompt
+                    "model": "deepseek-chat",
+                    "messages": [{"role": "user", "content": prompt}]
                 }
             )
 
             print("Status code:", r.status_code)
-            print("Respuesta Grok:", r.text)
+            print("Respuesta DeepSeek:", r.text)
 
             if r.status_code != 200:
-                return {"respuesta": f"Error de Grok ({r.status_code}): {r.text}"}
+                return {"respuesta": f"Error de DeepSeek ({r.status_code}): {r.text}"}
 
-            data = r.json()
-            return {"respuesta": data["output"][0]["content"][0]["text"]}
+            return {"respuesta": r.json()["choices"][0]["message"]["content"]}
 
         except Exception as e:
-            return {"respuesta": f"Error con Grok: {str(e)}"}
+            return {"respuesta": f"Error con DeepSeek: {str(e)}"}
 
-    return {"respuesta": "Modelo no reconocido. Usa 'gemini' o 'grok'."}
+    return {"respuesta": "Modelo no reconocido. Usa 'gemini' o 'deepseek'."}

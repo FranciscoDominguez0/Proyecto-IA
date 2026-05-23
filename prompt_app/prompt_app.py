@@ -26,11 +26,6 @@ class Estado(rx.State):
         self.modelo = value
 
     def limpiar(self):
-        self.instruccion = ""
-        self.contexto = ""
-        self.salida = ""
-        self.restricciones = ""
-        self.modelo = "gemini"
         self.respuesta = ""
 
     async def enviar(self):
@@ -73,7 +68,7 @@ def index():
         rx.text_area(placeholder="Límites o condiciones",
                      on_change=Estado.set_restricciones, width="100%"),
 
-        rx.select(["gemini", "grok"], default_value="gemini",
+        rx.select(["gemini", "deepseek"], default_value="gemini",
                   on_change=Estado.set_modelo),
 
         rx.hstack(
