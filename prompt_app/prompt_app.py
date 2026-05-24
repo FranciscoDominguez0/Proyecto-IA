@@ -63,7 +63,7 @@ def index():
     return rx.box(
         rx.hstack(
             rx.text("Prompt ", font_size="20px", font_weight="700", color=TEXT),
-            rx.text("Studio", font_size="20px", font_weight="300", color=MUTED),
+            rx.text("Api", font_size="20px", font_weight="300", color=MUTED),
             rx.spacer(),
             rx.hstack(
                 rx.box(width="7px", height="7px", border_radius="50%", background=GREEN, box_shadow=f"0 0 8px {GREEN}"),
