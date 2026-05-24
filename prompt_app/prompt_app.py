@@ -26,7 +26,7 @@ class Estado(rx.State):
         self.respuesta = ""
         yield
         async with httpx.AsyncClient(timeout=30) as client:
-            r = await client.post("http://localhost:8001/generar", json={
+            r = await client.post("http://localhost:8005/generar", json={
                 "instruccion": self.instruccion,
                 "contexto": self.contexto,
                 "salida": self.salida,
