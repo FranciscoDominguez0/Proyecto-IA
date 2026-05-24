@@ -10,7 +10,7 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = FastAPI(
-    title="PromptForge API",
+    title="Proyecto Inteligencia Artificial",
     description="API que recibe un prompt estructurado y llama a Gemini o DeepSeek",
     version="1.0"
 )
